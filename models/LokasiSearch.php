@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Lokasi;
 
 /**
  * LokasiSearch represents the model behind the search form of `app\models\Lokasi`.
@@ -13,18 +11,19 @@ use app\models\Lokasi;
 class LokasiSearch extends Lokasi
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id_lokasi', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['nama_lokasi', 'jenis_lokasi', 'google_place_id', 'gps'], 'safe'],
+            [['id_lokasi',  'created_at', 'updated_at'], 'integer'],
+            [['nama_lokasi', 'alamat_lokasi'], 'safe'],
+            [['latitude', 'longitude'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,7 @@ class LokasiSearch extends Lokasi
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -60,15 +59,14 @@ class LokasiSearch extends Lokasi
         // grid filtering conditions
         $query->andFilterWhere([
             'id_lokasi' => $this->id_lokasi,
-            'status' => $this->status,
+             'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'nama_lokasi', $this->nama_lokasi])
-            ->andFilterWhere(['like', 'jenis_lokasi', $this->jenis_lokasi])
-            ->andFilterWhere(['like', 'google_place_id', $this->google_place_id])
-            ->andFilterWhere(['like', 'gps', $this->gps]);
+            ->andFilterWhere(['like', 'alamat_lokasi', $this->alamat_lokasi]);
 
         return $dataProvider;
     }

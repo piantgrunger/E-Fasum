@@ -24,7 +24,8 @@ $menuItems =
             ['label' => 'Role', 'icon' => 'fa fa-circle-o', 'url' => ['/mimin/role/'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'User', 'icon' => ' fa fa-circle-o', 'url' => ['/mimin/user'], 'visible' => !Yii::$app->user->isGuest],
         ],
-    ],
+     ],
+     ['label' => 'Lokasi', 'icon' => ' fa fa-circle-o', 'url' => ['/lokasi'], 'visible' => !Yii::$app->user->isGuest],
 ];
 
 if (!Yii::$app->user->isGuest) {

@@ -13,6 +13,7 @@ $config = [
      'class' => '\hscstudio\mimin\components\AccessControl',
      'allowActions' => [
         // add wildcard allowed action here!
+        'lokasi/*',
        'site/*',
         'debug/*',
         'mimin/*', // only in dev mode
@@ -84,6 +85,18 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => 'AIzaSyCjQ96ZhSemhCZL2VDaW9oh48E2jkSIQFM',
+                        'language' => 'id',
+                        'version' => '3.1.18',
+                    ],
+                ],
+            ],
+        ],
+
        'authManager' => [
         'class' => 'yii\rbac\DbManager', // only support DbManager
     ],

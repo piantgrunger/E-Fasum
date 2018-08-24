@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -12,10 +11,10 @@ use yii\db\Expression;
  *
  * @property int    $id_lokasi
  * @property string $nama_lokasi
- * @property string $jenis_lokasi
+ * @property string $alamat_lokasi
  * @property int    $status
- * @property string $google_place_id
- * @property string $gps
+ * @property float  $latitude
+ * @property float  $longitude
  * @property int    $created_at
  * @property int    $updated_at
  */
@@ -24,9 +23,6 @@ class Lokasi extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public $lat;
-    public $lng;
-
     public function behaviors()
     {
         return [
@@ -53,10 +49,10 @@ class Lokasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_lokasi', 'google_place_id', 'gps', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['gps'], 'string'],
-            [['nama_lokasi', 'jenis_lokasi', 'google_place_id'], 'string', 'max' => 255],
+            [['nama_lokasi', 'alamat_lokasi'], 'required'],
+            [['created_at', 'updated_at'], 'integer'],
+            [['latitude', 'longitude'], 'number'],
+            [['nama_lokasi', 'alamat_lokasi'], 'string', 'max' => 255],
         ];
     }
 
@@ -66,14 +62,14 @@ class Lokasi extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_lokasi' => Yii::t('app', 'Id Lokasi'),
-            'nama_lokasi' => Yii::t('app', 'Nama Lokasi'),
-            'jenis_lokasi' => Yii::t('app', 'Jenis Lokasi'),
-            'status' => Yii::t('app', 'Status'),
-            'google_place_id' => Yii::t('app', 'Google Place ID'),
-            'gps' => Yii::t('app', 'Gps'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'id_lokasi' => 'Id Lokasi',
+            'nama_lokasi' => 'Nama Lokasi',
+            'alamat_lokasi' => 'Alamat Lokasi',
+
+            'latitude' => 'Latitude',
+            'longitude' => 'Longitude',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 }

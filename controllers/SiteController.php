@@ -13,11 +13,12 @@ use app\models\ResetPasswordForm;
 use app\models\SignupForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
+use app\models\Lokasi;
 
 class SiteController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -48,7 +49,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function actions()
     {
@@ -70,9 +71,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        
-          $model = new LoginForm();
-        return $this->render('index',['model'=>$model]);
+        $modelLokasi = Lokasi::find()->all();
+        $model = new LoginForm();
+
+        return $this->render('index', [
+            'model' => $model,
+            'modelLokasi' => $modelLokasi,
+            ]);
     }
 
     /**
@@ -189,7 +194,9 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
+     *
      * @return mixed
+     *
      * @throws BadRequestHttpException
      */
     public function actionResetPassword($token)

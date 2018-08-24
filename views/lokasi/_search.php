@@ -22,13 +22,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nama_lokasi') ?>
 
-    <?= $form->field($model, 'jenis_lokasi') ?>
+    <?= $form->field($model, 'alamat_lokasi') ?>
 
     <?= $form->field($model, 'status') ?>
 
-    <?= $form->field($model, 'google_place_id') ?>
+    <?= $form->field($model, 'latitude') ?>
 
-    <?php // echo $form->field($model, 'gps') ?>
+    <?php // echo $form->field($model, 'longitude') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 
