@@ -12,7 +12,7 @@ use yii\helpers\Url;
 <div class="site-index">
 
 
-      
+
 <?php
 
 $coord = new LatLng(['lat' => -3.456401, 'lng' => 114.808827]);
@@ -26,7 +26,7 @@ foreach ($modelLokasi as $lokasi) {
 
     $marker = new Marker([
         'position' => $coordLokasi,
-        'title' => $lokasi->nama_lokasi,
+        'title' => $lokasi->nama_perumahan,
         'animation' => 'google.maps.Animation.DROP',
         'draggable' => false,
         'visible' => 'true',
@@ -42,7 +42,7 @@ foreach ($modelLokasi as $lokasi) {
 // Display the map -finally :)
 echo $map->display();
 ?>
-        
+
 
 
 

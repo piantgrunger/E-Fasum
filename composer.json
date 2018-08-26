@@ -35,7 +35,8 @@
         "kartik-v/yii2-datecontrol": "dev-master",
           "yii2mod/yii2-google-maps-markers": "*",
         "guzzlehttp/guzzle": "^6.3@dev",
-        "2amigos/yii2-google-maps-library": "*"
+        "2amigos/yii2-google-maps-library": "*",
+        "league/csv": "^9.0@dev"
     
     },
     "require-dev": {

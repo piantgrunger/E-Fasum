@@ -33,7 +33,7 @@ if (!Yii::$app->user->isGuest) {
         $menuItems = Mimin::filterMenu($menuItems);
     }
 }
-$this->title = 'E-Fasum';
+$this->title = 'SI PANAH';
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ $this->title = 'E-Fasum';
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'E-Fasum',
+        'brandLabel' => 'SI PANAH',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -87,7 +87,7 @@ $this->title = 'E-Fasum';
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; E-Fasum <?= date('Y'); ?></p>
+        <p class="pull-left">&copy; Sistem Informasi Pengamanan Tanah <?= date('Y'); ?></p>
 
     </div>
 </footer>

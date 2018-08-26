@@ -3,6 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use  yii\helpers\Json;
+use app\models\Kecamatan;
+use app\models\Kelurahan;
 use app\models\Lokasi;
 use app\models\LokasiSearch;
 use yii\web\Controller;
@@ -68,6 +71,8 @@ class LokasiController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_lokasi]);
         } else {
+             $model->id_propinsi = 63;
+            $model->id_kota = 6372;
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -101,17 +106,46 @@ class LokasiController extends Controller
      */
     public function actionDelete($id)
     {
-        
+
        try
       {
         $this->findModel($id)->delete();
-      
+
       }
       catch(\yii\db\IntegrityException  $e)
       {
 	Yii::$app->session->setFlash('error', "Data Tidak Dapat Dihapus Karena Dipakai Modul Lain");
-       } 
+       }
          return $this->redirect(['index']);
+    }
+
+
+       public function actionKelurahan()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $id_propinsi = $_POST['depdrop_parents'];
+            $out = Kelurahan::getDataBrowseKelurahan($id_propinsi);
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+            echo Json::encode(['output' => $out, 'selected' => '']);
+            return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
+    }
+// THE CONTROLLER
+    public function actionKecamatan()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $id_propinsi = $_POST['depdrop_parents'];
+            $out = Kecamatan::getDataBrowseKecamatan($id_propinsi);
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+            echo Json::encode(['output' => $out, 'selected' => '']);
+            return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
     }
 
     /**

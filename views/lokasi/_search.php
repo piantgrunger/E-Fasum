@@ -20,13 +20,41 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_lokasi') ?>
 
-    <?= $form->field($model, 'nama_lokasi') ?>
+    <?= $form->field($model, 'id_propinsi') ?>
 
-    <?= $form->field($model, 'alamat_lokasi') ?>
+    <?= $form->field($model, 'id_kota') ?>
 
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'id_kecamatan') ?>
 
-    <?= $form->field($model, 'latitude') ?>
+    <?= $form->field($model, 'id_kelurahan') ?>
+
+    <?php // echo $form->field($model, 'no_sertifikat') ?>
+
+    <?php // echo $form->field($model, 'luas_tanah') ?>
+
+    <?php // echo $form->field($model, 'nib') ?>
+
+    <?php // echo $form->field($model, 'nama_sertifikat') ?>
+
+    <?php // echo $form->field($model, 'tanggal_sertifikat') ?>
+
+    <?php // echo $form->field($model, 'hak') ?>
+
+    <?php // echo $form->field($model, 'alamat_lokasi') ?>
+
+    <?php // echo $form->field($model, 'nama_perumahan') ?>
+
+    <?php // echo $form->field($model, 'alamat_perumahan') ?>
+
+    <?php // echo $form->field($model, 'nilai_satuan') ?>
+
+    <?php // echo $form->field($model, 'total_nilai') ?>
+
+    <?php // echo $form->field($model, 'asal_usul') ?>
+
+    <?php // echo $form->field($model, 'pencatatan') ?>
+
+    <?php // echo $form->field($model, 'latitude') ?>
 
     <?php // echo $form->field($model, 'longitude') ?>
 
