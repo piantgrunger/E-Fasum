@@ -6,6 +6,7 @@ use hscstudio\mimin\components\Mimin;
 use dosamigos\google\maps\Map;
 use dosamigos\google\maps\LatLng;
 use dosamigos\google\maps\overlays\Marker;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Lokasi */
@@ -59,8 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 </div>
 <div class="col-md-6">
+
+<?=Html::img(Url::to(['/media\/'.$model->gambar]), ['width' => '100%']); ?>
 <?php
-    $coord = new LatLng(['lat' => $model->latitude, 'lng' => $model->longitude]);
+$coord = new LatLng(['lat' => -3.456401, 'lng' => 114.808827]);
 
 $map = new Map([
     'center' => $coord,

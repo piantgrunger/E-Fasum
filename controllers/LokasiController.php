@@ -72,8 +72,25 @@ class LokasiController extends Controller
     {
         $model = new Lokasi();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_lokasi]);
+        if ($model->load(Yii::$app->request->post())) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailLokasi = Yii::$app->request->post('Detlokasi', []);
+                if ($model->upload('gambar') && $model->save()) {
+                    $transaction->commit();
+
+                    return $this->redirect(['view', 'id' => $model->id_lokasi]);
+                } else {
+                    $transaction->rollBack();
+
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
         } else {
             $model->id_propinsi = 63;
             $model->id_kota = 6372;
@@ -100,7 +117,7 @@ class LokasiController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailLokasi = Yii::$app->request->post('Detlokasi', []);
-                if ($model->save()) {
+                if ($model->upload('gambar') && $model->save()) {
                     $transaction->commit();
 
                     return $this->redirect(['view', 'id' => $model->id_lokasi]);

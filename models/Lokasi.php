@@ -6,6 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "tb_m_lokasi".
@@ -38,6 +39,7 @@ class Lokasi extends \yii\db\ActiveRecord
     /*
      * {@inheritdoc}
      */
+    public $old_gambar;
     use \mdm\behaviors\ar\RelationTrait;
 
     public function behaviors()
@@ -69,7 +71,7 @@ class Lokasi extends \yii\db\ActiveRecord
             [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'nilai_satuan', 'total_nilai'], 'required'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'created_at', 'updated_at'], 'integer'],
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
-            [['tanggal_sertifikat'], 'safe'],
+            [['tanggal_sertifikat', 'gambar'], 'safe'],
             [['no_sertifikat', 'nib', 'nama_sertifikat', 'hak', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'asal_usul', 'pencatatan'], 'string', 'max' => 255],
         ];
     }
@@ -138,5 +140,27 @@ class Lokasi extends \yii\db\ActiveRecord
     public function setDetailLokasi($value)
     {
         return $this->loadRelated('detailLokasi', $value);
+    }
+
+    public function upload($fieldName)
+    {
+        $path = Yii::getAlias('@app').'/web/media/';
+        $image = UploadedFile::getInstance($this, $fieldName);
+        if (!empty($image) && $image->size !== 0) {
+            $fileNames = md5($this->alamat_lokasi).'.'.$image->extension;
+            if ($image->saveAs($path.$fileNames)) {
+                $this->attributes = array($fieldName => $fileNames);
+
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if ($fieldName === 'gambar') {
+                $this->attributes = array($fieldName => $this->old_gambar);
+            }
+
+            return true;
+        }
     }
 }
