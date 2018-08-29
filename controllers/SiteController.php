@@ -71,7 +71,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $modelLokasi = Lokasi::find()->all();
+        $modelLokasi = Lokasi::find()
+        ->all()
+
+        ;
         $model = new LoginForm();
 
         return $this->render('index', [

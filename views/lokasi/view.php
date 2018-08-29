@@ -16,20 +16,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lokasi-view">
 <div class="col-md-6">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
     <p>
-             <?php if ((Mimin::checkRoute($this->context->id."/update"))) {
-    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_lokasi], ['class' => 'btn btn-primary']) ?>
+             <?php if ((Mimin::checkRoute($this->context->id.'/update'))) {
+    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_lokasi], ['class' => 'btn btn-primary']); ?>
         <?php
-} if ((Mimin::checkRoute($this->context->id."/delete"))) {
+} if ((Mimin::checkRoute($this->context->id.'/delete'))) {
         ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id_lokasi], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); ?>
         <?php
     } ?>    </p>
 
@@ -53,12 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'total_nilai',
             'asal_usul',
             'pencatatan',
-            'latitude',
-            'longitude',
             'created_at',
             'updated_at',
         ],
-    ]) ?>
+    ]); ?>
 </div>
 <div class="col-md-6">
 <?php
@@ -69,14 +67,19 @@ $map = new Map([
     'zoom' => 14,
     'width' => '100%',
 ]);
-$marker = new Marker([
-    'position' => $coord,
-    'title' => 'Fasum',
-    'animation' => 'google.maps.Animation.DROP',
-    'visible' => 'true',
 
-]);
-$map->addOverlay($marker);
+foreach ($model->detailLokasi as $lokasi) {
+    $coordLokasi = new LatLng(['lat' => $lokasi->latitude, 'lng' => $lokasi->longitude]);
+
+    $marker = new Marker([
+        'position' => $coordLokasi,
+        'animation' => 'google.maps.Animation.DROP',
+        'draggable' => false,
+        'visible' => 'true',
+    ]);
+    $map->addOverlay($marker);
+}
+
 // Display the map -finally :)
 echo $map->display();
 ?>

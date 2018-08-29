@@ -3,19 +3,17 @@
 namespace app\models;
 
 use Yii;
-
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
-
 /**
  * This is the model class for table "tb_m_lokasi".
  *
- * @property int $id_lokasi
- * @property int $id_propinsi
- * @property int $id_kota
- * @property int $id_kecamatan
+ * @property int    $id_lokasi
+ * @property int    $id_propinsi
+ * @property int    $id_kota
+ * @property int    $id_kecamatan
  * @property string $id_kelurahan
  * @property string $no_sertifikat
  * @property string $luas_tanah
@@ -32,15 +30,15 @@ use yii\db\Expression;
  * @property string $pencatatan
  * @property string $latitude
  * @property string $longitude
- * @property int $created_at
- * @property int $updated_at
+ * @property int    $created_at
+ * @property int    $updated_at
  */
 class Lokasi extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
+    /*
+     * {@inheritdoc}
      */
-
+    use \mdm\behaviors\ar\RelationTrait;
 
     public function behaviors()
     {
@@ -56,13 +54,14 @@ class Lokasi extends \yii\db\ActiveRecord
             ],
         ];
     }
+
     public static function tableName()
     {
         return 'tb_m_lokasi';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -76,7 +75,7 @@ class Lokasi extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -105,16 +104,19 @@ class Lokasi extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
-         /* @return \yii\db\ActiveQuery
+
+    /* @return \yii\db\ActiveQuery
      */
     public function getKecamatan()
     {
         return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
     }
+
     public function getNama_kecamatan()
     {
         return ($this->kecamatan === null) ? '' : $this->kecamatan->nama_kecamatan;
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -122,9 +124,19 @@ class Lokasi extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
     }
+
     public function getNama_kelurahan()
     {
         return ($this->kelurahan === null) ? '' : $this->kelurahan->nama_kelurahan;
     }
 
+    public function getDetailLokasi()
+    {
+        return $this->hasMany(Detlokasi::className(), ['id_lokasi' => 'id_lokasi']);
+    }
+
+    public function setDetailLokasi($value)
+    {
+        return $this->loadRelated('detailLokasi', $value);
+    }
 }

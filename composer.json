@@ -36,7 +36,9 @@
           "yii2mod/yii2-google-maps-markers": "*",
         "guzzlehttp/guzzle": "^6.3@dev",
         "2amigos/yii2-google-maps-library": "*",
-        "league/csv": "^9.0@dev"
+        "league/csv": "^9.0@dev", 
+        "mdmsoft/yii2-ar-behaviors": "~1.0",
+        "mdmsoft/yii2-widgets": "^1.2"
     
     },
     "require-dev": {
