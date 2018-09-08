@@ -7,6 +7,7 @@ use  yii\helpers\Json;
 use app\models\Kecamatan;
 use app\models\Kelurahan;
 use app\models\Lokasi;
+use app\models\Detlokasi;
 use app\models\LokasiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -94,6 +95,20 @@ class LokasiController extends Controller
         } else {
             $model->id_propinsi = 63;
             $model->id_kota = 6372;
+            $model_det = new Detlokasi();
+            $model_det->posisi = 'Utara';
+            $det_model[] = $model_det;
+            $model_det = new Detlokasi();
+            $model_det->posisi = 'Selatan';
+            $det_model[] = $model_det;
+            $model_det = new Detlokasi();
+            $model_det->posisi = 'Timur';
+            $det_model[] = $model_det;
+            $model_det = new Detlokasi();
+            $model_det->posisi = 'Barat';
+            $det_model[] = $model_det;
+
+            $model->detailLokasi = $det_model;
 
             return $this->render('create', [
                 'model' => $model,
@@ -112,6 +127,7 @@ class LokasiController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->old_gambar = $model->gambar;
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction();

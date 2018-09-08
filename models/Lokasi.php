@@ -68,7 +68,7 @@ class Lokasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'nilai_satuan', 'total_nilai'], 'required'],
+            [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'nilai_satuan', 'total_nilai', 'id_barang'], 'required'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'created_at', 'updated_at'], 'integer'],
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
             [['tanggal_sertifikat', 'gambar'], 'safe'],

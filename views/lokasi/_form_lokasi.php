@@ -44,21 +44,25 @@ $setMarker = $this->registerJS('
 
     <?= $form->field($model, 'alamat_perumahan')->textInput(['maxlength' => true]); ?>
 
+    <?= $form->field($model, 'longitude')->textInput(['maxlength' => true]); ?>
+
+ <?= $form->field($model, 'latitude')->textInput(['maxlength' => true]); ?>
 
 <div class="panel panel-primary"   >
-<div class="panel-heading"> Peta Lokasi
+<div class="panel-heading"> Batas Lokasi
 
 </div>
 </div>
 <table class="table">
     <thead>
         <tr>
+        <th> Posisi </th>
+         
              <th> Latitude </th>
             <th>Longitude</th>
             <th>Peta </th>
 
 
-            <th><a id="btn-add2" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
         </tr>
     </thead>
     <?= \mdm\widgets\TabularInput::widget([
