@@ -16,7 +16,7 @@ MapAsset::register($this);
 <div class="lokasi-form">
 
 
-<?php 
+<?php
         Modal::begin([
                 'header' => '<h4>Peta</h4>',
                 'id' => 'modal',
@@ -33,12 +33,12 @@ MapAsset::register($this);
     $item =
 [
     [
-        'label' => 'Data Lokasi',
+        'label' => 'Pengamanan Administrasi ',
         'content' => $this->render('_form_lokasi', ['model' => $model, 'form' => $form]),
         'active' => true,
     ],
     [
-        'label' => 'Data Sertifikat',
+        'label' => 'Pengamanan Fisik',
         'content' => $this->render('_form_sertifikat', ['model' => $model, 'form' => $form]),
     ],
         [

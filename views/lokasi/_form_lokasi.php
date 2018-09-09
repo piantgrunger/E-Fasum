@@ -3,53 +3,158 @@
 use yii\helpers\Html;
 use kartik\widgets\DepDrop;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+use app\models\Barang;
+use kartik\select2\Select2;
+use kartik\datecontrol\DateControl;
 
-$setMarker = $this->registerJS('
-');
+$data = ArrayHelper::map(
+    Barang::find()
+        ->select([
+            'id_barang', 'ket' => " concat(kode_barang,' - ',nama_barang)",
+        ])
+        ->asArray()
+        ->all(),
+    'id_barang',
+    'ket'
+);
+
+$js=<<<JS
+  $(document).ready(function()
+    {
+  if ($("#lokasi-id_barang") . val() === "7") {
+    document.getElementById("perumahan").style.display="block";
+} else {
+    document.getElementById("perumahan").style.display="none";
+}
+
+  if ($("#lokasi-dokumen_kepemilikan") . val() !== "Tanpa Dokumen") {
+    document.getElementById("sertifikat").style.display="block";
+} else {
+    document.getElementById("sertifikat").style.display="none";
+}
+
+
+    });
+
+    $("#lokasi-dokumen_kepemilikan") . on("change", function (e)
+    {
+
+  if ($("#lokasi-dokumen_kepemilikan") . val() !== "Tanpa Dokumen") {
+    document.getElementById("sertifikat").style.display="block";
+} else {
+    document.getElementById("sertifikat").style.display="none";
+}
+});
+    $("#lokasi-id_barang") . on("change", function (e)
+    {
+  if ($("#lokasi-id_barang") . val() === "7") {
+    document.getElementById("perumahan").style.display="block";
+} else {
+    document.getElementById("perumahan").style.display="none";
+}
+    });
+
+
+
+JS;
+$this->registerJS($js);
+
+
+
 
 ?>
-<?=  Html::activeHiddenInput($model, 'id_propinsi'); ?>
+<?=$form->field($model, 'id_barang')->widget(Select2::className(), [
+    'data' => $data,
+    'options' => ['placeholder' => 'Pilih Barang...',
+    ],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+])->label('Nama Barang');
+?>
+<div id="perumahan">
+<?= $form->field($model, 'nama_perumahan')->textInput(['maxlength' => true]); ?>
+</div>
+<?= $form->field($model, 'dokumen_kepemilikan')->dropDownList(
+    ['Tanpa Dokumen' => 'Tanpa Dokumen',
+    'Sertifikat' => 'Sertifikat',
+    'Sporadik' => 'Sporadik',
+    'Surat Keterangan (SKT)' => 'Surat Keterangan (SKT)',
+    'Segel'=>'Segel',
+
+],
+    ['prompt' => '']
+);
+?>
+<div id="sertifikat">
+ <?= $form->field($model, 'no_sertifikat')->textInput(['maxlength' => true]) ;?>
+
+    <?= $form->field($model, 'nama_sertifikat')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tanggal_sertifikat')->widget(DateControl::className()) ?>
+
+</div>
+<?= $form->field($model, 'asal_usul')->dropDownList(
+    [
+        'Pembelian' => 'Pembelian',
+        'Hibah' => 'Hibah',
+        'Historis' => 'Historis',
+
+    ],
+    ['prompt' => '']
+);
+?>
+<?= $form->field($model, 'hak')->dropDownList(
+    [
+        'HPL' => 'HPL',
+        'HP' => 'HP',
+        'HM' => 'HM',
+        'HGB' => 'HGM',
+
+    ],
+    ['prompt' => '']
+);
+?>
+
+  <?= $form->field($model, 'luas_tanah')->textInput(['maxlength' => true]) ?>
+<div class="text-bold">Lokasi Aset</div>
+<div class="text">&nbsp</div>
+
+<?= Html::activeHiddenInput($model, 'id_propinsi'); ?>
 
 <?= Html::activeHiddenInput($model, 'id_kota'); ?>
 
    <?= $form->field($model, 'id_kecamatan')->widget(DepDrop::classname(), [
-'type' => DepDrop::TYPE_SELECT2,
-'data' => [$model->id_kecamatan => is_null($model->kecamatan) ? '' : $model->kecamatan->nama_kecamatan],
-'options' => ['placeholder' => 'Pilih Kecamatan ...'],
-'select2Options' => ['pluginOptions' => ['allowClear' => true]],
-'pluginOptions' => [
-    'depends' => ['lokasi-id_kota'],
-    'url' => Url::to(['/lokasi/kecamatan']),
-    'placeholder' => 'Pilih Kecamatan ...',
-    'initialize' => true,
-    ],
-])->label('Kecamatan'); ?>
+        'type' => DepDrop::TYPE_SELECT2,
+        'data' => [$model->id_kecamatan => is_null($model->kecamatan) ? '' : $model->kecamatan->nama_kecamatan],
+        'options' => ['placeholder' => 'Pilih Kecamatan ...'],
+        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+        'pluginOptions' => [
+            'depends' => ['lokasi-id_kota'],
+            'url' => Url::to(['/lokasi/kecamatan']),
+            'placeholder' => 'Pilih Kecamatan ...',
+            'initialize' => true,
+        ],
+    ])->label('Kecamatan'); ?>
 
 
      <?= $form->field($model, 'id_kelurahan')->widget(DepDrop::classname(), [
-'type' => DepDrop::TYPE_SELECT2,
-'data' => [$model->id_kelurahan => is_null($model->kelurahan) ? '' : $model->kelurahan->nama_kelurahan],
-'options' => ['placeholder' => 'Pilih kelurahan ...'],
-'select2Options' => ['pluginOptions' => ['allowClear' => true]],
-'pluginOptions' => [
-    'depends' => ['lokasi-id_kecamatan'],
-    'url' => Url::to(['/lokasi/kelurahan']),
-    'placeholder' => 'Pilih kelurahan ...',
-    'initialize' => true,
-    ],
-])->label('Kelurahan'); ?>
+        'type' => DepDrop::TYPE_SELECT2,
+        'data' => [$model->id_kelurahan => is_null($model->kelurahan) ? '' : $model->kelurahan->nama_kelurahan],
+        'options' => ['placeholder' => 'Pilih kelurahan ...'],
+        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+        'pluginOptions' => [
+            'depends' => ['lokasi-id_kecamatan'],
+            'url' => Url::to(['/lokasi/kelurahan']),
+            'placeholder' => 'Pilih kelurahan ...',
+            'initialize' => true,
+        ],
+    ])->label('Kelurahan'); ?>
     <?= $form->field($model, 'alamat_lokasi')->textInput(['maxlength' => true]); ?>
 
-    <?= $form->field($model, 'nama_perumahan')->textInput(['maxlength' => true]); ?>
-
-    <?= $form->field($model, 'alamat_perumahan')->textInput(['maxlength' => true]); ?>
-
-    <?= $form->field($model, 'longitude')->textInput(['maxlength' => true]); ?>
-
- <?= $form->field($model, 'latitude')->textInput(['maxlength' => true]); ?>
-
 <div class="panel panel-primary"   >
-<div class="panel-heading"> Batas Lokasi
+<div class="panel-heading"> Titik Koordinat Lokasi
 
 </div>
 </div>
@@ -57,7 +162,7 @@ $setMarker = $this->registerJS('
     <thead>
         <tr>
         <th> Posisi </th>
-         
+
              <th> Latitude </th>
             <th>Longitude</th>
             <th>Peta </th>
@@ -79,3 +184,8 @@ $setMarker = $this->registerJS('
     ]);
     ?>
     </table>
+
+
+    <?= $form->field($model, 'longitude')->textInput(['maxlength' => true]); ?>
+
+ <?= $form->field($model, 'latitude')->textInput(['maxlength' => true]); ?>

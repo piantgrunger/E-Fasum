@@ -128,6 +128,10 @@ class LokasiController extends Controller
     {
         $model = $this->findModel($id);
         $model->old_gambar = $model->gambar;
+        $model->old_gambar_pagar = $model->gambar_pagar;
+        $model->old_gambar_pondasi = $model->gambar_pondasi;
+        $model->old_gambar_patok = $model->gambar_patok;
+        $model->old_gambar_papan_nama = $model->gambar_papan_nama;
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction();
