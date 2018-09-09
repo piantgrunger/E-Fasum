@@ -44,6 +44,7 @@ class Lokasi extends \yii\db\ActiveRecord
     public $old_gambar_pondasi;
     public $old_gambar_patok;
     public $old_gambar_papan_nama;
+    public $file_dokumen;
 
     use \mdm\behaviors\ar\RelationTrait;
 
@@ -77,10 +78,11 @@ class Lokasi extends \yii\db\ActiveRecord
             [['nama_perumahan'],'required', 'when' => function ($model) {
                 return $model->id_barang == 7;
             }],
-            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'created_at', 'updated_at'], 'integer'],
+            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
-            [['tanggal_sertifikat', 'gambar'], 'safe'],
-            [['gambar'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxSize' => 512000000],
+            [['tanggal_sertifikat', 'gambar','foto_dokumen'], 'safe'],
+            [['gambar', 'gambar_pagar', 'gambar_pondasi', 'gambar_papan_nama', 'gambar_patok'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxSize' => 512000000],
+            [['file_dokumen'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxFiles'=>10],
 
             [['no_sertifikat', 'nib', 'nama_sertifikat', 'hak', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'asal_usul', 'pencatatan','penggunaan_tanah'], 'string', 'max' => 255],
         ];

@@ -83,6 +83,7 @@ $this->registerJS($js);
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar,
                 'initialPreviewAsData' => true,
+
             ],
         ]); ?>
 <?= $form->field($model, 'pagar')->dropDownList(
