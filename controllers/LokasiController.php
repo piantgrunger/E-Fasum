@@ -77,7 +77,12 @@ class LokasiController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailLokasi = Yii::$app->request->post('Detlokasi', []);
-                if ($model->upload('gambar') && $model->save()) {
+                if ($model->upload('gambar')
+                && $model->upload('gambar_pagar')
+                && $model->upload('gambar_pondasi')
+                && $model->upload('gambar_patok')
+                && $model->upload('gambar_papan_nama')
+                 && $model->save()) {
                     $transaction->commit();
 
                     return $this->redirect(['view', 'id' => $model->id_lokasi]);
@@ -137,7 +142,14 @@ class LokasiController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailLokasi = Yii::$app->request->post('Detlokasi', []);
-                if ($model->upload('gambar') && $model->save()) {
+
+                if ($model->upload('gambar')
+                && $model->upload('gambar_pagar')
+                && $model->upload('gambar_pondasi')
+                && $model->upload('gambar_patok')
+                && $model->upload('gambar_papan_nama')
+                && $model->uploadDokumen()
+                && $model->save()) {
                     $transaction->commit();
 
                     return $this->redirect(['view', 'id' => $model->id_lokasi]);

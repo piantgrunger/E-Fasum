@@ -11,7 +11,7 @@ $js = "$('#modalButton-$key').click(function (){
 $this->registerJS($js);
 
 ?>
-<td><?=$model->posisi; ?></td>
+<td><?= $form->field($model, "[$key]posisi")->textInput(['maxlength' => true])->label(false); ?></td>
 
 <td>
 <?= $form->field($model, "[$key]latitude")->textInput(['maxlength' => true])->label(false); ?>
@@ -31,6 +31,6 @@ $this->registerJS($js);
 
 
 <?=$form->field($model, "[$key]id_d_lokasi")->hiddenInput()->label(false); ?>
-<?=$form->field($model, "[$key]posisi")->hiddenInput()->label(false); ?>
+
 
 </td>

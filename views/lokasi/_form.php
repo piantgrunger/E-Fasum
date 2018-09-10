@@ -42,7 +42,7 @@ MapAsset::register($this);
         'content' => $this->render('_form_sertifikat', ['model' => $model, 'form' => $form]),
     ],
         [
-        'label' => 'Data Keterangan',
+        'label' => 'Pengamanan Hukum',
         'content' => $this->render('_form_keterangan', ['model' => $model, 'form' => $form]),
     ],
 ];

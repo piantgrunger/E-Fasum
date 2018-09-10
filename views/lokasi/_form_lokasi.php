@@ -19,7 +19,7 @@ $data = ArrayHelper::map(
     'ket'
 );
 
-$js=<<<JS
+$js = <<<JS
   $(document).ready(function()
     {
   if ($("#lokasi-id_barang") . val() === "7") {
@@ -55,13 +55,27 @@ $js=<<<JS
 }
     });
 
+    $("#lokasi-luas_tanah") . on("change", function (e)
+    {   
+  
+        $("#luas_tanah2").text($(this).val());
+       var total =parseFloat($(this).val())*parseFloat($("#lokasi-nilai_satuan").val());
+       $("#lokasi-total_nilai").val(total);
+        
+    });
 
+    
+    $("#lokasi-nilai_satuan") . on("change", function (e)
+    {   
+  
+    
+       var total =parseFloat($(this).val())*parseFloat($("#lokasi-luas_tanah").val());
+       $("#lokasi-total_nilai").val(total);
+        
+    });
 
 JS;
 $this->registerJS($js);
-
-
-
 
 ?>
 <?=$form->field($model, 'id_barang')->widget(Select2::className(), [
@@ -81,18 +95,17 @@ $this->registerJS($js);
     'Sertifikat' => 'Sertifikat',
     'Sporadik' => 'Sporadik',
     'Surat Keterangan (SKT)' => 'Surat Keterangan (SKT)',
-    'Segel'=>'Segel',
-
+    'Segel' => 'Segel',
 ],
     ['prompt' => '']
 );
 ?>
 <div id="sertifikat">
- <?= $form->field($model, 'no_sertifikat')->textInput(['maxlength' => true]) ;?>
+ <?= $form->field($model, 'no_sertifikat')->textInput(['maxlength' => true]); ?>
 
-    <?= $form->field($model, 'nama_sertifikat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nama_sertifikat')->textInput(['maxlength' => true]); ?>
 
-    <?= $form->field($model, 'tanggal_sertifikat')->widget(DateControl::className()) ?>
+    <?= $form->field($model, 'tanggal_sertifikat')->widget(DateControl::className()); ?>
 
 </div>
 <?= $form->field($model, 'asal_usul')->dropDownList(
@@ -100,7 +113,6 @@ $this->registerJS($js);
         'Pembelian' => 'Pembelian',
         'Hibah' => 'Hibah',
         'Historis' => 'Historis',
-
     ],
     ['prompt' => '']
 );
@@ -111,13 +123,12 @@ $this->registerJS($js);
         'HP' => 'HP',
         'HM' => 'HM',
         'HGB' => 'HGM',
-
     ],
     ['prompt' => '']
 );
 ?>
 
-  <?= $form->field($model, 'luas_tanah')->textInput(['maxlength' => true]) ?>
+  <?= $form->field($model, 'luas_tanah')->textInput(['maxlength' => true]); ?>
 <div class="text-bold">Lokasi Aset</div>
 <div class="text">&nbsp</div>
 

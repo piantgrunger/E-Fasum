@@ -1,7 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use kartik\widgets\FileInput;
 use yii\helpers\Url;
 
@@ -36,7 +34,17 @@ $js = <<<JS
 }
 
 
-    })
+    });
+
+
+    $("#lokasi-patok").on("change", function (e)
+    {
+  if ($("#lokasi-patok").val() === "Ya") {
+    document.getElementById("patok").style.display="block";
+} else {
+    document.getElementById("patok").style.display="none";
+}
+    });
 
 
     $("#lokasi-papan_nama").on("change", function (e)
@@ -46,8 +54,7 @@ $js = <<<JS
 } else {
     document.getElementById("papan_nama").style.display="none";
 }
-    });;
-
+    });
     $("#lokasi-pondasi").on("change", function (e)
     {
   if ($("#lokasi-pondasi").val() === "Ya") {
@@ -71,7 +78,6 @@ $js = <<<JS
 JS;
 $this->registerJS($js);
 
-
 ?>
 
       <?= $form->field($model, 'gambar')->widget(FileInput::classname(), [
@@ -79,19 +85,16 @@ $this->registerJS($js);
             'pluginOptions' => [
                 'overwriteInitial' => true,
                 'showUpload' => false,
-                'initialPreview' => [Url::to(['/media\/' . $model->gambar], true)],
+                'initialPreview' => [Url::to(['/media\/'.$model->gambar], true)],
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar,
                 'initialPreviewAsData' => true,
-
             ],
         ]); ?>
 <?= $form->field($model, 'pagar')->dropDownList(
     [
-        'Ya' =>'Ya',
+        'Ya' => 'Ya',
         'Tidak' => 'Tidak',
-
-
     ],
     ['prompt' => '']
 );
@@ -102,7 +105,7 @@ $this->registerJS($js);
             'pluginOptions' => [
                 'overwriteInitial' => true,
                 'showUpload' => false,
-                'initialPreview' => [Url::to(['/media\/' . $model->gambar_pagar], true)],
+                'initialPreview' => [Url::to(['/media\/'.$model->gambar_pagar], true)],
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar_pagar,
                 'initialPreviewAsData' => true,
@@ -114,8 +117,6 @@ $this->registerJS($js);
     [
         'Ya' => 'Ya',
         'Tidak' => 'Tidak',
-
-
     ],
     ['prompt' => '']
 );
@@ -126,7 +127,7 @@ $this->registerJS($js);
             'pluginOptions' => [
                 'overwriteInitial' => true,
                 'showUpload' => false,
-                'initialPreview' => [Url::to(['/media\/' . $model->gambar_pondasi], true)],
+                'initialPreview' => [Url::to(['/media\/'.$model->gambar_pondasi], true)],
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar_pondasi,
                 'initialPreviewAsData' => true,
@@ -139,8 +140,6 @@ $this->registerJS($js);
     [
         'Ya' => 'Ya',
         'Tidak' => 'Tidak',
-
-
     ],
     ['prompt' => '']
 );
@@ -151,7 +150,7 @@ $this->registerJS($js);
             'pluginOptions' => [
                 'overwriteInitial' => true,
                 'showUpload' => false,
-                'initialPreview' => [Url::to(['/media\/' . $model->gambar_patok], true)],
+                'initialPreview' => [Url::to(['/media\/'.$model->gambar_patok], true)],
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar_patok,
                 'initialPreviewAsData' => true,
@@ -164,8 +163,6 @@ $this->registerJS($js);
     [
         'Ya' => 'Ya',
         'Tidak' => 'Tidak',
-
-
     ],
     ['prompt' => '']
 );
@@ -176,7 +173,7 @@ $this->registerJS($js);
             'pluginOptions' => [
                 'overwriteInitial' => true,
                 'showUpload' => false,
-                'initialPreview' => [Url::to(['/media\/' . $model->gambar_papan_nama], true)],
+                'initialPreview' => [Url::to(['/media\/'.$model->gambar_papan_nama], true)],
                 'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
                 'initialCaption' => $model->gambar_papan_nama,
                 'initialPreviewAsData' => true,

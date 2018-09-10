@@ -39,23 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
           //  'id_propinsi',
           //  'id_kota',
+          'no_brankas',
             'nama_kecamatan',
            'nama_kelurahan',
             'no_sertifikat',
             'luas_tanah',
-            'nib',
             'nama_sertifikat',
             'tanggal_sertifikat',
             'hak',
+            'nama_kecamatan',
+            'nama_kelurahan',
             'alamat_lokasi',
-            'nama_perumahan',
-            'alamat_perumahan',
             'nilai_satuan',
             'total_nilai',
-            'asal_usul',
-            'pencatatan',
-            'created_at',
-            'updated_at',
         ],
     ]); ?>
 </div>
@@ -63,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?=Html::img(Url::to(['/media\/'.$model->gambar]), ['width' => '100%']); ?>
 <?php
-$coord = new LatLng(['lat' => -3.456401, 'lng' => 114.808827]);
+$coord = new LatLng(['lat' => $model->latitude, 'lng' => $model->longitude]);
 
 $map = new Map([
     'center' => $coord,
@@ -71,8 +67,7 @@ $map = new Map([
     'width' => '100%',
 ]);
 
-foreach ($model->detailLokasi as $lokasi) {
-    $coordLokasi = new LatLng(['lat' => $lokasi->latitude, 'lng' => $lokasi->longitude]);
+    $coordLokasi = new LatLng(['lat' => $model->latitude, 'lng' => $model->longitude]);
 
     $marker = new Marker([
         'position' => $coordLokasi,
@@ -81,7 +76,6 @@ foreach ($model->detailLokasi as $lokasi) {
         'visible' => 'true',
     ]);
     $map->addOverlay($marker);
-}
 
 // Display the map -finally :)
 echo $map->display();

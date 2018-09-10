@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "tb_m_lokasi".
@@ -45,6 +46,7 @@ class Lokasi extends \yii\db\ActiveRecord
     public $old_gambar_patok;
     public $old_gambar_papan_nama;
     public $file_dokumen;
+    public $old_foto_dokumen;
 
     use \mdm\behaviors\ar\RelationTrait;
 
@@ -60,6 +62,13 @@ class Lokasi extends \yii\db\ActiveRecord
                 // if you're using datetime instead of UNIX timestamp:
                  'value' => new Expression('NOW()'),
             ],
+            [
+                'class' => 'mdm\autonumber\Behavior',
+                'attribute' => 'no_brankas', // required
+                'group' => $this->id_barang, // optional
+                'value' => 'SA.'.date('Y-m-d').'.?', // format auto number. '?' will be replaced with generated number
+                'digit' => 4, // optional, default to null.
+            ],
         ];
     }
 
@@ -74,23 +83,45 @@ class Lokasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi', 'nama_perumahan', 'nilai_satuan', 'total_nilai', 'id_barang', 'dokumen_kepemilikan','asal_usul'], 'required'],
-            [['nama_perumahan'],'required', 'when' => function ($model) {
+            [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi',  'nilai_satuan',
+             'total_nilai', 'id_barang', 'dokumen_kepemilikan', 'asal_usul', 'pagar', 'papan_nama', 'patok', 'pondasi', ], 'required'],
+            [['nama_perumahan'], 'required', 'when' => function ($model) {
                 return $model->id_barang == 7;
             }],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
-            [['tanggal_sertifikat', 'gambar','foto_dokumen'], 'safe'],
+            [['tanggal_sertifikat', 'gambar', 'foto_dokumen', 'no_brankas'], 'safe'],
             [['gambar', 'gambar_pagar', 'gambar_pondasi', 'gambar_papan_nama', 'gambar_patok'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxSize' => 512000000],
-            [['file_dokumen'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxFiles'=>10],
+            [['file_dokumen'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxFiles' => 10],
+            [['alamat_lokasi'], 'getNumber'],
 
-            [['no_sertifikat', 'nib', 'nama_sertifikat', 'hak', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'asal_usul', 'pencatatan','penggunaan_tanah'], 'string', 'max' => 255],
+            [['no_sertifikat', 'nib', 'nama_sertifikat', 'hak', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'asal_usul', 'pencatatan', 'penggunaan_tanah'], 'string', 'max' => 255],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
+    public function getNumber($attribute, $params)
+    {
+        if (is_null($this->no_brankas)) {
+            $last = Lokasi::find()
+          ->where(['id_barang' => $this->id_barang])
+          ->andWhere(['<>', 'id_lokasi', $this->id_lokasi])
+          ->orderBy(['no_brankas' => SORT_DESC])
+          ->one();
+
+            if (!is_null($last)) {
+                $no = explode($this->kode_barang.'.', $last->no_brankas);
+                $lastNo = is_numeric($no) && !is_null($no) ? $no + 1 : 1;
+            } else {
+                $lastNo = 1;
+            }
+
+            $this->no_brankas = $this->kode_barang.'.'.str_pad($lastNo, 4, '0', STR_PAD_LEFT);
+        }
+    }
+
     public function attributeLabels()
     {
         return [
@@ -158,7 +189,38 @@ class Lokasi extends \yii\db\ActiveRecord
 
     public function getBarang()
     {
-        return $this->hasOne(Barang::className(), ['id_barang'=>'id_barang']);
+        return $this->hasOne(Barang::className(), ['id_barang' => 'id_barang']);
+    }
+
+    public function getKode_barang()
+    {
+        return (is_null($this->barang)) ? '' : $this->barang->kode_barang;
+    }
+
+    public function uploadDokumen()
+    {
+        $images = UploadedFile::getInstances($this, 'file_dokumen');
+
+        if (count($images) > 0) {
+            $path = Yii::getAlias('@app').'/web/media/';
+            FileHelper::unlink($path.'*-'.md5($this->id_lokasi).'*');
+            $this->foto_dokumen = '';
+
+            $i = 0;
+            foreach ($images as $image) {
+                ++$i;
+                if (!empty($image) && $image->size !== 0) {
+                    $fileNames = $i.'-'.md5($this->id_lokasi).'.'.$image->extension;
+                    if ($image->saveAs($path.$fileNames)) {
+                        $this->foto_dokumen = $this->foto_dokumen.$fileNames.'&&';
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     public function upload($fieldName)

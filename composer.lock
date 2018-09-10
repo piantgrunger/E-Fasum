@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "250bf30b3026f320080d80fb591b0e25",
+    "content-hash": "b156aa7a212d2b1a9d04ed95da639532",
     "packages": [
         {
             "name": "2amigos/yii2-google-maps-library",
@@ -2937,6 +2937,54 @@
                 "yii2"
             ],
             "time": "2016-10-05T15:34:08+00:00"
+        },
+        {
+            "name": "mdmsoft/yii2-autonumber",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdmsoft/yii2-autonumber.git",
+                "reference": "0a2d75907ef0fd465bc6115a2b90ec6ee0e39408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-autonumber/zipball/0a2d75907ef0fd465bc6115a2b90ec6ee0e39408",
+                "reference": "0a2d75907ef0fd465bc6115a2b90ec6ee0e39408",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "mdm\\autonumber\\Bootstrap",
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mdm\\autonumber\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul D Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "Auto number extension for the Yii framework",
+            "keywords": [
+                " autonumber",
+                " behavior",
+                " extension",
+                "yii2"
+            ],
+            "time": "2016-02-06T03:48:58+00:00"
         },
         {
             "name": "mdmsoft/yii2-widgets",

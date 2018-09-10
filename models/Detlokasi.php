@@ -29,10 +29,10 @@ class Detlokasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['longitude', 'latitude'], 'required'],
+            [['longitude', 'latitude', 'posisi'], 'required'],
             [['id_lokasi'], 'integer'],
             [['latitude', 'longitude'], 'number'],
-            [['lokasi'], 'string'],
+
             [['id_lokasi'], 'exist', 'skipOnError' => true, 'targetClass' => Lokasi::className(), 'targetAttribute' => ['id_lokasi' => 'id_lokasi']],
         ];
     }
