@@ -5,10 +5,18 @@ use dosamigos\google\maps\LatLng;
 use dosamigos\google\maps\overlays\Marker;
 use dosamigos\google\maps\Event;
 
-$marker_dragend_event_js = <<<JS
+if ($key >0) {
+    $marker_dragend_event_js = <<<JS
     document.getElementById("detlokasi-$key-latitude").value = event.latLng.lat();
     document.getElementById("detlokasi-$key-longitude").value = event.latLng.lng();
 JS;
+} else {
+    $marker_dragend_event_js = <<<JS
+    document.getElementById("lokasi-latitude").value = event.latLng.lat();
+    document.getElementById("lokasi-longitude").value = event.latLng.lng();
+JS;
+}
+
 
     $coord = new LatLng(['lat' => -3.456401, 'lng' => 114.808827]);
 

@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Lokasi */
 
-$this->title = $model->id_lokasi;
+$this->title = $model->no_brankas;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Lokasi'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

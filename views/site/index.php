@@ -22,25 +22,22 @@ $map = new Map([
     'width' => '100%',
 ]);
 foreach ($modelLokasi as $lokasi) {
-    foreach ($lokasi->detailLokasi as $lokasi_det) {
-        $coordLokasi = new LatLng(['lat' => $lokasi_det->latitude, 'lng' => $lokasi_det->longitude]);
+    $coordLokasi = new LatLng(['lat' => $lokasi->latitude, 'lng' => $lokasi->longitude]);
 
-        $marker = new Marker([
+    $marker = new Marker([
         'position' => $coordLokasi,
-        'title' => $lokasi->nama_perumahan,
+        'title' => $lokasi->no_brankas,
         'animation' => 'google.maps.Animation.DROP',
         'draggable' => false,
         'visible' => 'true',
     ]);
-        $marker->attachInfoWindow(
+    $marker->attachInfoWindow(
         new InfoWindow([
-            'content' => '<a href='.Url::to(['/lokasi/view', 'id' => $lokasi->id_lokasi]).' >Detail Fasum</a>',
+            'content' => '<a href='.Url::to(['/lokasi/view', 'id' => $lokasi->id_lokasi]).' >Detail Lokasi</a>',
        ])
     );
 
-        $map->addOverlay($marker);
-    }
-    // code...
+    $map->addOverlay($marker);
 }
 // Display the map -finally :)
 echo $map->display();
