@@ -5,7 +5,7 @@ use dosamigos\google\maps\LatLng;
 use dosamigos\google\maps\overlays\Marker;
 use dosamigos\google\maps\Event;
 
-if ($key >0) {
+if ($key >=0) {
     $marker_dragend_event_js = <<<JS
     document.getElementById("detlokasi-$key-latitude").value = event.latLng.lat();
     document.getElementById("detlokasi-$key-longitude").value = event.latLng.lng();

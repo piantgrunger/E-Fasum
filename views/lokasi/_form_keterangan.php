@@ -1,6 +1,7 @@
 <?php
 use kartik\widgets\FileInput;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $allimage = array();
 $doc_image = explode('&&', $model->foto_dokumen);
@@ -24,3 +25,8 @@ foreach ($doc_image as $eachimage) {
 <div class="text"><p id="luas_tanah2" ><?=$model->luas_tanah; ?></p></div>
 <?= $form->field($model, 'nilai_satuan')->textInput(['maxlength' => true]); ?>
 <?= $form->field($model, 'total_nilai')->textInput(['readOnly' => true]); ?>
+
+
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']); ?>
+    </div>

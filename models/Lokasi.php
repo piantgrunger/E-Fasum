@@ -83,11 +83,15 @@ class Lokasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_propinsi', 'id_kota', 'no_sertifikat', 'luas_tanah', 'nama_sertifikat', 'alamat_lokasi',  'nilai_satuan',
+            [['id_propinsi', 'id_kota',  'luas_tanah',  'alamat_lokasi',  'nilai_satuan',
              'total_nilai', 'id_barang', 'dokumen_kepemilikan', 'asal_usul', 'pagar', 'papan_nama', 'patok', 'pondasi', ], 'required'],
             [['nama_perumahan'], 'required', 'when' => function ($model) {
-                return $model->id_barang == 7;
-            }],
+                return $model->id_barang === 7;
+            }, 'enableClientValidation' => false],
+            [['no_sertifikat','nama_sertifikat'], 'required', 'when' => function ($model) {
+                return $model->dokumen_kepemilikan !== 'Tanpa Dokumen';
+            }, 'enableClientValidation' => false],
+
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
             [['tanggal_sertifikat', 'gambar', 'foto_dokumen', 'no_brankas'], 'safe'],
