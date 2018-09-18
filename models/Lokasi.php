@@ -201,6 +201,15 @@ class Lokasi extends \yii\db\ActiveRecord
         return (is_null($this->barang)) ? '' : $this->barang->kode_barang;
     }
 
+    public function getNama_barang()
+    {
+        return (is_null($this->barang)) ? '' : $this->barang->nama_barang;
+    }
+    public function getRegister()
+    {
+        substr($this->no_brankas, -4);
+    }
+
     public function uploadDokumen()
     {
         $images = UploadedFile::getInstances($this, 'file_dokumen');
