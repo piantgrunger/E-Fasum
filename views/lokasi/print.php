@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
 
 <?=Html::img(Url::to('https://maps.googleapis.com/maps/api/staticmap?center='.$model->latitude.','.$model->longitude.
-'&zoom=13&size=800x600&maptype=roadmap&markers=color:blue%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%']); ?>
+'&zoom=13&size=200x150&maptype=roadmap&markers=color:blue%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%']); ?>
 
 </div>
 
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <footer class="footer">
     <div class="container">
-        <p class="pull-right" align ="centet">  Banjarbaru  <?= date('d F Y'); ?> <br>
+        <p class="pull-right" align ="center">  Banjarbaru  <?= date('d F Y'); ?> <br>
        Sekretaris Daerah <br>
         Selaku Pengelola Barang,<br>
         &nbsp;<br>
