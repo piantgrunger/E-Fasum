@@ -24,26 +24,43 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
     <h1><?= Html::encode($this->title); ?></h1>
 
-    
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-          //  'id_propinsi',
-          //  'id_kota',
-          'no_brankas',
-            'nama_kecamatan',
-           'nama_kelurahan',
+            'register',
+            'kode_barang',
+            'nama_barang',
+            'dokumen_kepemilikan',
+            'hak',
             'no_sertifikat',
             'luas_tanah',
             'nama_sertifikat',
-            'tanggal_sertifikat',
-            'hak',
-            'nama_kecamatan',
-            'nama_kelurahan',
             'alamat_lokasi',
+            'latitude',
+           'longitude',
             'nilai_satuan',
-            'total_nilai',
+
         ],
     ]); ?>
 </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="pull-right" align ="centet">  Banjarbaru  <?= date('d F Y'); ?> <br>
+       Sekretaris Daerah <br>
+        Selaku Pengelola Barang,<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+   <b><u>  Drs. H. SAID ABDULLAH, M.Si
+   </u></b>   <br>
+Pembina  Utama Madya<br>
+NIP. 19650928 199203 1 008
+
+        </p>
+
+    </div>
+</footer>
