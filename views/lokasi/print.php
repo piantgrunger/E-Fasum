@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
 
 <?=Html::img(Url::to('https://maps.googleapis.com/maps/api/staticmap?center='.$model->latitude.','.$model->longitude.
-'&zoom=13&size=200x150&maptype=roadmap&markers=color:blue%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%']); ?>
+'&zoom=13&size=800x600&maptype=roadmap&markers=color:blue%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%','height'=>'300px']); ?>
 
 </div>
 

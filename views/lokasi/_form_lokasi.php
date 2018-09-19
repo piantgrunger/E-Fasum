@@ -211,3 +211,4 @@ $this->registerJS($js);
  <?= $form->field($model, 'latitude')->textInput(['maxlength' => true]); ?>
 
 <?= Html::button('Peta Lokasi', ['value' => Url::to(['/lokasi/peta', 'key' => -1]), 'class' => 'btn btn-success', 'id' => 'modalButton']); ?>
+ <?= $form->field($model, 'penggunaan_tanah')->textArea(); ?>
