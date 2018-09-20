@@ -88,7 +88,7 @@ class Lokasi extends \yii\db\ActiveRecord
             [['nama_perumahan'], 'required', 'when' => function ($model) {
                 return $model->id_barang === 7;
             }, 'enableClientValidation' => false],
-            [['no_sertifikat','nama_sertifikat'], 'required', 'when' => function ($model) {
+            [['no_sertifikat', 'nama_sertifikat'], 'required', 'when' => function ($model) {
                 return $model->dokumen_kepemilikan !== 'Tanpa Dokumen';
             }, 'enableClientValidation' => false],
 
@@ -205,9 +205,10 @@ class Lokasi extends \yii\db\ActiveRecord
     {
         return (is_null($this->barang)) ? '' : $this->barang->nama_barang;
     }
+
     public function getRegister()
     {
-        substr($this->no_brankas, -4);
+        return substr($this->no_brankas, -4);
     }
 
     public function uploadDokumen()

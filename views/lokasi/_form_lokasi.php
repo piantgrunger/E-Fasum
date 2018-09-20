@@ -16,7 +16,6 @@ $js = "$('#modalButton').click(function (){
 });";
 $this->registerJS($js);
 
-
 $data = ArrayHelper::map(
     Barang::find()
         ->select([
@@ -183,9 +182,8 @@ $this->registerJS($js);
         <tr>
         <th> Posisi </th>
 
-             <th>X</th>
-            <th>Y</th>
-            <th>Peta </th>
+             <th>Koordinat</th>
+
 
 
         </tr>
