@@ -116,7 +116,7 @@ class Lokasi extends \yii\db\ActiveRecord
           ->one();
 
             if (!is_null($last)) {
-                $no = explode($this->kode_barang.'.', $last->no_brankas);
+                $no = substr($last->no_brankas, -4);
                 $lastNo = is_numeric($no) && !is_null($no) ? $no + 1 : 1;
             } else {
                 $lastNo = 1;
