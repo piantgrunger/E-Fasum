@@ -5,6 +5,7 @@ use dosamigos\google\maps\Map;
 use dosamigos\google\maps\overlays\Marker;
 use dosamigos\google\maps\overlays\InfoWindow;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
@@ -26,14 +27,14 @@ foreach ($modelLokasi as $lokasi) {
 
     $marker = new Marker([
         'position' => $coordLokasi,
-        'title' => $lokasi->no_brankas,
+        'title' => $lokasi->nama_barang,
         'animation' => 'google.maps.Animation.DROP',
         'draggable' => false,
         'visible' => 'true',
     ]);
     $marker->attachInfoWindow(
         new InfoWindow([
-            'content' => '<a href='.Url::to(['/lokasi/view', 'id' => $lokasi->id_lokasi]).' >Detail Lokasi</a>',
+            'content' => '<a href='.Url::to(['/site/view', 'id' => $lokasi->id_lokasi]).'> Detail Lokasi</a><br>'. Html::img(Url::to(['/media\/' . $lokasi->gambar]), ['width' => '150px' ,'height'=>'150px']) ,
        ])
     );
 

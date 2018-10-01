@@ -191,6 +191,36 @@ class Lokasi extends \yii\db\ActiveRecord
         return $this->loadRelated('detailLokasi', $value);
     }
 
+    public function getUtara()
+    {
+        $utara = Detlokasi::find()->where(['id_lokasi' => $this->id_lokasi])
+        ->andWhere("posisi = 'Utara'")
+        ->one();
+        return is_null($utara)?"":$utara->koordinat;
+    }
+
+    public function getSelatan()
+    {
+        $utara = Detlokasi::find()->where(['id_lokasi' => $this->id_lokasi])
+            ->andWhere("posisi = 'Selatan'")
+            ->one();
+        return is_null($utara) ? "" : $utara->koordinat;
+    }
+    public function getTimur()
+    {
+        $utara = Detlokasi::find()->where(['id_lokasi' => $this->id_lokasi])
+            ->andWhere("posisi = 'Timur'")
+            ->one();
+        return is_null($utara) ? "" : $utara->koordinat;
+    }
+    public function getBarat()
+    {
+        $utara = Detlokasi::find()->where(['id_lokasi' => $this->id_lokasi])
+            ->andWhere("posisi = 'Barat'")
+            ->one();
+        return is_null($utara) ? "" : $utara->koordinat;
+    }
+
     public function getBarang()
     {
         return $this->hasOne(Barang::className(), ['id_barang' => 'id_barang']);
@@ -269,5 +299,9 @@ class Lokasi extends \yii\db\ActiveRecord
 
             return true;
         }
+    }
+    public function getTitik_koordinat()
+    {
+        return "";
     }
 }

@@ -15,15 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lokasi-view">
 <div class="col-md-6">
-
-<?=Html::img(Url::to('https://maps.googleapis.com/maps/api/staticmap?center='.$model->latitude.','.$model->longitude.
-'&zoom=13&size=800x600&maptype=roadmap&markers=color:blue%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%','height'=>'300px']); ?>
-
+<div class="header" style="margin-bottom :40px">
+<div class="image" style="background: url('<?=Url::to(['/logo.png'])?>') no-repeat;background-size:cover;  width: 56px; height: 75px; float: left;
+    display: inline-block;"></div>
+<div class="text" style="float: left;
+    display: inline-block;
+    vertical-align: bottom;"><h3><p     align='center'><b>LAPORAN DATA TANAH PER PERSIL TANAH <br>
+MILIK PEMERINTAH KOTA BANJARBARU </b></p></h3>
+</div>
 </div>
 
-<div class="col-md-6">
-    <h1><?= Html::encode($this->title); ?></h1>
+<div class="img-responsive" style="margin-top:20px;margin-bottom:20px">
+<?=Html::img(Url::to('https://maps.googleapis.com/maps/api/staticmap?center='.$model->latitude.','.$model->longitude.
+'&zoom=13&size=800x600&maptype=roadmap&markers=color:red%7Clabel:Lokasi%7C'.$model->latitude.','.$model->longitude.'&key='.$key), ['width' => '100%','height'=>'250px']); ?>
+</div>
+</div>
 
+<div class="col-md-6"style="margin-top:20px;" >
 
     <?= DetailView::widget([
         'model' => $model,
@@ -39,6 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'alamat_lokasi',
             'latitude',
            'longitude',
+           'titik_koordinat',
+           'utara',
+            'selatan',
+            'timur',
+            'barat',
+
+           'penggunaan_tanah',
             'nilai_satuan',
 
         ],
@@ -46,8 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 <footer class="footer">
-    <div class="container">
-        <p class="pull-right" align ="center">  Banjarbaru  <?= date('d F Y'); ?> <br>
+    <div class="container" style>
+        <p class="pull-right" align ="right" style="float:right">  Banjarbaru  <?= date('d F Y'); ?> <br>
        Sekretaris Daerah <br>
         Selaku Pengelola Barang,<br>
         &nbsp;<br>

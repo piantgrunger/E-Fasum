@@ -130,7 +130,7 @@ $this->registerJS($js);
         'HPL' => 'HPL',
         'HP' => 'HP',
         'HM' => 'HM',
-        'HGB' => 'HGM',
+        'HGB' => 'HGB',
     ],
     ['prompt' => '']
 );

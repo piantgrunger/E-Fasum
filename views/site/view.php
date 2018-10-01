@@ -12,27 +12,11 @@ use yii\helpers\Url;
 /* @var $model app\models\Lokasi */
 
 $this->title = $model->nama_barang;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Lokasi'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lokasi-view">
 <div class="col-md-6">
     <h1><?= Html::encode($this->title); ?></h1>
-
-    <p>
-             <?php if ((Mimin::checkRoute($this->context->id.'/update'))) {
-    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_lokasi], ['class' => 'btn btn-primary']); ?>
-        <?php
-} if ((Mimin::checkRoute($this->context->id.'/delete'))) {
-        ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id_lokasi], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
-                'method' => 'post',
-            ],
-        ]); ?>
-        <?php
-    } ?>    </p>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -55,9 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'barat',
 
             'penggunaan_tanah',
-            'nilai_satuan',
-
-            'total_nilai',
 
         ],
     ]); ?>

@@ -69,6 +69,14 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => Lokasi::findOne($id),
+        ]);
+    }
+
+
     public function actionIndex()
     {
         $modelLokasi = Lokasi::find()

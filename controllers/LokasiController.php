@@ -135,6 +135,7 @@ class LokasiController extends Controller
         $content = $this->renderPartial('print', [
             'model' => $this->findModel($id),
         ]);
+
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
    // set to use core fonts only
@@ -157,7 +158,7 @@ class LokasiController extends Controller
     // call mPDF methods on the fly
         ]);
 
-        return $pdf->render();
+        return  $pdf->render();
     }
 
     public function actionReport()
