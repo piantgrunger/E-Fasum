@@ -18,7 +18,7 @@ foreach ($doc_image as $eachimage) {
     'pluginOptions' => ['overwriteInitial' => true,
         'showUpload' => false,
        'initialPreview' => $allimage,
-        'initialPreviewFileType' => 'image', // image is the default and can be overridden in config below
+        'initialPreviewFileType' => 'pdf', // image is the default and can be overridden in config below
         'initialPreviewAsData' => true, ], ]); ?>
 
 <div class="text-bold">Luas Tanah (M2)</div>

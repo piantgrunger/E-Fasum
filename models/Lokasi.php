@@ -96,7 +96,7 @@ class Lokasi extends \yii\db\ActiveRecord
             [['luas_tanah', 'nilai_satuan', 'total_nilai', 'latitude', 'longitude'], 'number'],
             [['tanggal_sertifikat', 'gambar', 'foto_dokumen', 'no_brankas'], 'safe'],
             [['gambar', 'gambar_pagar', 'gambar_pondasi', 'gambar_papan_nama', 'gambar_patok'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxSize' => 512000000],
-            [['file_dokumen'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxFiles' => 10],
+            [['file_dokumen'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg,pdf', 'maxFiles' => 10],
             [['alamat_lokasi'], 'getNumber'],
 
             [['no_sertifikat', 'nib', 'nama_sertifikat', 'hak', 'alamat_lokasi', 'nama_perumahan', 'alamat_perumahan', 'asal_usul', 'pencatatan', 'penggunaan_tanah'], 'string', 'max' => 255],
