@@ -76,18 +76,19 @@ class SiteController extends Controller
         ]);
     }
 
-
     public function actionIndex()
     {
         $modelLokasi = Lokasi::find()
         ->all()
 
         ;
+        $center = $this->GetCenterFromDegrees($modelLokasi);
         $model = new LoginForm();
 
         return $this->render('index', [
             'model' => $model,
             'modelLokasi' => $modelLokasi,
+            'center' => $center,
             ]);
     }
 
@@ -227,5 +228,41 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function GetCenterFromDegrees($data)
+    {
+        if (!is_array($data)) {
+            return false;
+        }
+
+        $num_coords = count($data);
+
+        $X = 0.0;
+        $Y = 0.0;
+        $Z = 0.0;
+
+        foreach ($data as $coord) {
+            $lat = $coord->latitude * pi() / 180;
+            $lon = $coord->longitude * pi() / 180;
+
+            $a = cos($lat) * cos($lon);
+            $b = cos($lat) * sin($lon);
+            $c = sin($lat);
+
+            $X += $a;
+            $Y += $b;
+            $Z += $c;
+        }
+
+        $X /= $num_coords;
+        $Y /= $num_coords;
+        $Z /= $num_coords;
+
+        $lon = atan2($Y, $X);
+        $hyp = sqrt($X * $X + $Y * $Y);
+        $lat = atan2($Z, $hyp);
+
+        return array($lat * 180 / pi(), $lon * 180 / pi());
     }
 }

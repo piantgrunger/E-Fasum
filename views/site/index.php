@@ -43,7 +43,7 @@ $this->registerJS($js);
 
 <?php
 
-$coord = new LatLng(['lat' => -3.456401, 'lng' => 114.808827]);
+$coord = new LatLng(['lat' => $center[0], 'lng' => $center[1]]);
 $map = new Map([
     'center' => $coord,
     'zoom' => 14,
