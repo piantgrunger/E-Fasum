@@ -6,11 +6,38 @@ use dosamigos\google\maps\overlays\Marker;
 use dosamigos\google\maps\overlays\InfoWindow;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\bootstrap\Modal;
 
+$js = " 
+$(window).on('load',function(){
+    $('#myModal').modal('show');
+});
+";
+
+$this->registerJS($js);
 /* @var $this yii\web\View */
 
 ?>
-<div class="site-index">
+
+
+<?php
+        Modal::begin([
+                'id' => 'myModal',
+                'size' => 'modal-lg',
+            ]);
+        echo "<div id='modalContent'> <img src='".Url::to(['/splash.jpg'])."'  width='100%' height='500px'></div>";
+        Modal::end();
+    ?>
+
+<div class="modal"  id="myModal"    size = 'modal-lg'>
+ 
+  <div class="modal-body">
+    <img src="<?=Url::to(['/splash.jpg']); ?>" alt="" width="50%" height="500px">
+  </div>
+  
+</div>
+
+<div>
 
 
 
@@ -34,7 +61,7 @@ foreach ($modelLokasi as $lokasi) {
     ]);
     $marker->attachInfoWindow(
         new InfoWindow([
-            'content' => '<a href='.Url::to(['/site/view', 'id' => $lokasi->id_lokasi]).'> Detail Lokasi</a><br>'. Html::img(Url::to(['/media\/' . $lokasi->gambar]), ['width' => '150px' ,'height'=>'150px']) ,
+            'content' => '<a href='.Url::to(['/site/view', 'id' => $lokasi->id_lokasi]).'> Detail Lokasi</a><br>'.Html::img(Url::to(['/media\/'.$lokasi->gambar]), ['width' => '150px', 'height' => '150px']),
        ])
     );
 
