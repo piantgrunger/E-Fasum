@@ -23,6 +23,20 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            [
+            'class' => 'yii\filters\PageCache',
+            'only' => ['index','view'] ,
+            'duration' => 60,
+            'variations' => [
+                \Yii::$app->language,
+            ],
+            'dependency' => [
+                'class' => 'yii\caching\DbDependency',
+                'sql' => 'SELECT COUNT(*) FROM tb_m_lokasi'
+            ],
+        ],
+          
+          
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout', 'signup'],

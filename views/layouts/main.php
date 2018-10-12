@@ -8,6 +8,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\widgets\Alert;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 use hscstudio\mimin\components\Mimin;
@@ -35,6 +36,8 @@ if (!Yii::$app->user->isGuest) {
     }
 }
 $this->title = 'SI PANAH';
+ $path =Url::to(['/'],true);
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/ico', 'href' => $path.'logo.png']);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>

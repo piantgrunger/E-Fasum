@@ -21,23 +21,18 @@ $this->registerJS($js);
 
 
 <?php
+  if(Yii::$app->user->isGuest)
+  {
         Modal::begin([
                 'id' => 'myModal',
                 'size' => 'modal-lg',
             ]);
         echo "<div id='modalContent'> <img src='".Url::to(['/splash.jpg'])."'  width='100%' height='500px'></div>";
         Modal::end();
-    ?>
+  }   
+?>
 
-<div class="modal"  id="myModal"    size = 'modal-lg'>
- 
-  <div class="modal-body">
-    <img src="<?=Url::to(['/splash.jpg']); ?>" alt="" width="50%" height="500px">
-  </div>
-  
-</div>
 
-<div>
 
 
 
