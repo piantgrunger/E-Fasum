@@ -10,7 +10,8 @@ use yii\bootstrap\Modal;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
 
-if ($model->cari === "") {
+$request = Yii::$app->request;
+if (($request->isGet) &&(Yii::$app->user->isGuest)) {
     $js = "
 $(window).on('load',function(){
     $('#myModal').modal('show');
