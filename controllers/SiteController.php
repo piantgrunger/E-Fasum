@@ -23,7 +23,7 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            [
+      /*      [
             'class' => 'yii\filters\PageCache',
             'only' => ['index','view'] ,
             'duration' => 60,
@@ -35,8 +35,8 @@ class SiteController extends Controller
                 'sql' => 'SELECT COUNT(*) FROM tb_m_lokasi'
             ],
         ],
-          
-          
+
+*/
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout', 'signup'],
@@ -97,7 +97,15 @@ class SiteController extends Controller
 
         ;
         $center = $this->GetCenterFromDegrees($modelLokasi);
-        $model = new LoginForm();
+        $model = new \yii\base\DynamicModel(['cari'])  ;
+        $model->addRule(['cari'], 'safe');
+
+        if ($model->load(Yii::$app->request->post())) {
+            $modelLokasi = Lokasi::find()
+            ->filterWhere(['like','alamat_lokasi',$model->cari])
+            ->orFilterWhere(['like', 'nama_perumahan', $model->cari])
+                ->all();
+        }
 
         return $this->render('index', [
             'model' => $model,

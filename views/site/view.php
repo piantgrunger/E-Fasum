@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'luas_tanah',
             'nama_sertifikat',
             'alamat_lokasi',
+            'nama_perumahan',
             'latitude',
             'longitude',
             'titik_koordinat',

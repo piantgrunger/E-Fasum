@@ -7,30 +7,44 @@ use dosamigos\google\maps\overlays\InfoWindow;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
+use yii\bootstrap\ActiveForm;
+use yii\widgets\Pjax;
 
-$js = " 
+if ($model->cari === "") {
+    $js = "
 $(window).on('load',function(){
     $('#myModal').modal('show');
 });
 ";
 
-$this->registerJS($js);
+    $this->registerJS($js);
+}
 /* @var $this yii\web\View */
 
 ?>
 
 
 <?php
-  if(Yii::$app->user->isGuest)
-  {
-        Modal::begin([
+  if (Yii::$app->user->isGuest) {
+      Modal::begin([
                 'id' => 'myModal',
                 'size' => 'modal-lg',
             ]);
-        echo "<div id='modalContent'> <img src='".Url::to(['/splash.jpg'])."'  width='100%' height='500px'></div>";
-        Modal::end();
-  }   
+      echo "<div id='modalContent'> <img src='".Url::to(['/splash.jpg'])."'  width='100%' height='500px'></div>";
+      Modal::end();
+  }
 ?>
+
+ <?php $form = ActiveForm::begin(['method'=>'POST']); ?>
+
+        <?= $form
+            ->field($model, 'cari')
+            ->label(false)
+            ->textInput(['placeholder' => 'Untuk Pencarian Masukkan Alamat atau Nama Perumahan']); ?>
+
+
+
+        <?php ActiveForm::end(); ?>
 
 
 
