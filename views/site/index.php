@@ -58,6 +58,7 @@ $map = new Map([
     'center' => $coord,
     'zoom' => 14,
     'width' => '100%',
+    'height' => '435',
 ]);
 foreach ($modelLokasi as $lokasi) {
     $coordLokasi = new LatLng(['lat' => $lokasi->latitude, 'lng' => $lokasi->longitude]);

@@ -36,7 +36,7 @@ if (!Yii::$app->user->isGuest) {
     }
 }
 $this->title = 'SI PANAH';
- $path =Url::to(['/'],true);
+ $path =Url::to(['/'], true);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/ico', 'href' => $path.'logo.png']);
 ?>
 <?php $this->beginPage(); ?>
@@ -93,6 +93,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/ico', 'href' => $path.
     <div class="container">
         <p class="pull-left">&copy; Sistem Informasi Pengamanan Tanah <?= date('Y'); ?></p>
 
+         <p class="pull-right">Pengunjung :
+<script type="text/javascript">
+var sc_project=11850053;
+var sc_invisible=0;
+var sc_security="e3818788";
+var sc_https=1;
+var scJsHost = (("https:" == document.location.protocol) ? "https://secure." :
+"http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><img
+class="statcounter" src="//c.statcounter.com/11850053/0/e3818788/0/" alt="Web
+Analytics Made Easy - StatCounter"></div></noscript>
+<!-- End of Statcounter Code --></p>
     </div>
 </footer>
 
